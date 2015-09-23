@@ -1,5 +1,29 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'filemanager'
+
+    publishedGroupId = 'cn.timeface.tfoss'
+    libraryName = 'FileManager'
+    artifact = 'filemanager'
+
+    libraryDescription = 'Use ALi OSS to upload and downloan file.'
+
+    siteUrl = 'https://github.com/TimeFaceCoder/TFOSS'
+    gitUrl = 'https://github.com/TimeFaceCoder/TFOSS.git'
+
+    libraryVersion = "1.0.0"
+
+    developerId = 'timeface'
+    developerName = 'Ray'
+    developerEmail = 'sglyapp@timeface.cn'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -7,8 +31,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 20150923
+        versionName "1.0.0"
     }
     buildTypes {
         release {
@@ -19,10 +43,11 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.aliyun.dpa:oss-android-sdk:1.4.0'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.5.0'
     compile 'com.squareup.okio:okio:1.6.0'
 }
+
+apply from: '../install.gradle'
+apply from: '../bintray.gradle'
