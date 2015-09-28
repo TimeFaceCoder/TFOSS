@@ -93,6 +93,10 @@ public class OSSManager {
     }
 
     protected String getObjectKey(File file) {
-        return this.folderName + "/" + MD5.md5sum(file) + ".jpg";
+        int index = file.getAbsolutePath().lastIndexOf(".");
+        if (index > 0) {
+            throw new IllegalArgumentException("没有查找到合法后缀.");
+        }
+        return this.folderName + "/" + MD5.md5sum(file) + file.getAbsolutePath().substring(index - 1);
     }
 }
