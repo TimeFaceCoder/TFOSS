@@ -13,8 +13,6 @@ import com.alibaba.sdk.android.oss.model.StsTokenGetter;
 import com.alibaba.sdk.android.oss.storage.OSSBucket;
 import com.alibaba.sdk.android.oss.util.OSSLog;
 
-import java.io.File;
-
 import cn.timeface.tfoss.recorder.RecorderStrategy;
 import cn.timeface.tfoss.token.FederationToken;
 import cn.timeface.tfoss.token.FederationTokenGetter;
