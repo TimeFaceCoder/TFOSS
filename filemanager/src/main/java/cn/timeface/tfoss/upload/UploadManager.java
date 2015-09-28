@@ -1,4 +1,4 @@
-package cn.timeface.tfoss;
+package cn.timeface.tfoss.upload;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,12 +11,11 @@ import com.alibaba.sdk.android.oss.storage.TaskHandler;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.WeakHashMap;
+
+import cn.timeface.tfoss.OSSManager;
 
 
 /**
@@ -30,37 +29,20 @@ public class UploadManager extends OSSManager {
         super(context, serverAddress, endPoint, bucketName);
     }
 
-    public boolean checkFileExist(File file) {
+    public void checkFileExist(UploadFileObj file, Callback callback) {
         OkHttpClient httpClient = new OkHttpClient();
-        String url = String.format("http://%s.%s/%s", this.bucketName, this.endPoint, getObjectKey(file));
+        String url = String.format("http://%s.%s/%s", this.bucketName, this.endPoint, file.getObjectKey(this.folderName));
         Request request = new Request.Builder().head()
                 .url(url)
                 .build();
-
-        httpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-                if (response.code() == 200) {
-                    //已上传
-                } else {
-                    //未上传，执行上传操作
-                }
-            }
-        });
-        return true;
+        httpClient.newCall(request).enqueue(callback);
     }
 
-    public void upload(File file) {
-        String filePath = file.getAbsolutePath();
-        String key = getObjectKey(file);
+    public void upload(UploadFileObj file) {
+        String key = file.getObjectKey(folderName);
         OSSFile ossFile = ossService.getOssFile(bucket, key);
         try {
-            ossFile.setUploadFilePath(filePath, "application/octet-stream");
+            ossFile.setUploadFilePath(file.getRealUploadFile().getAbsolutePath(), "application/octet-stream");
             TaskHandler task = ossFile.ResumableUploadInBackground(new SaveCallback() {
                 @Override
                 public void onSuccess(String objectKey) {
@@ -68,9 +50,7 @@ public class UploadManager extends OSSManager {
                     if (recorderStrategy != null) {
                         recorderStrategy.deleteRecorder(objectKey);
                     }
-
                     queue.remove(objectKey);
-
                 }
 
                 @Override
@@ -86,33 +66,24 @@ public class UploadManager extends OSSManager {
                 }
             });
 
-            this.queue.put(file.getAbsolutePath(), task);
+            this.queue.put(file.getPath(), task);
             if (recorderStrategy != null) {
-                recorderStrategy.addRecorder(key, file);
+                recorderStrategy.addRecorder(key, file.getFile());
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public void cancel(File file) {
-        String key = getObjectKey(file);
+    public void cancel(UploadFileObj file) {
+        String key = file.getObjectKey(folderName);
         if (this.queue.get(key) != null) {
             this.queue.remove(key).cancel();
         }
     }
 
-    // 断点上传
-    public void upload(String filePath) {
-        upload(new File(filePath));
-    }
-
-    public void delete(String filePath) {
-        delete(new File(filePath));
-    }
-
-    public void delete(File file) {
-        String key = getObjectKey(file);
+    public void delete(UploadFileObj file) {
+        String key = file.getObjectKey(folderName);
         OSSFile ossFile = ossService.getOssFile(bucket, key);
         ossFile.deleteInBackground(new DeleteCallback() {
             @Override

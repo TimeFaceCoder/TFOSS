@@ -1,6 +1,8 @@
-package cn.timeface.tfoss;
+package cn.timeface.tfoss.download;
 
 import android.content.Context;
+
+import cn.timeface.tfoss.OSSManager;
 
 /**
  * author: rayboot  Created on 15/9/23.

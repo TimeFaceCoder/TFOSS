@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import java.io.File;
 
-import cn.timeface.tfoss.UploadManager;
+import cn.timeface.tfoss.upload.UploadManager;
 
 public class MainActivity extends AppCompatActivity {
 
