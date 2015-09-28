@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import java.io.File;
 
+import cn.timeface.tfoss.upload.UploadFileObj;
 import cn.timeface.tfoss.upload.UploadManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -55,10 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            uploadManager.upload("/mnt/sdcard/Download/swift.jpg");
+            uploadManager.upload(new UploadFileObj(new File("/mnt/sdcard/Download/swift.jpg")));
             return true;
         }else if (id == R.id.action_delete) {
-            uploadManager.checkFileExist(new File("/mnt/sdcard/Download/swift.jpg"));
         }
 
         return super.onOptionsItemSelected(item);
