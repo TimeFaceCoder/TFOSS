@@ -140,7 +140,7 @@ Usage
 Gradle:
 
     dependencies {
-        compile 'compile 'cn.timeface.tfoss:filemanager:1.1.0''
+        compile 'cn.timeface.tfoss:filemanager:1.1.1'
     }
 
 
