@@ -133,6 +133,12 @@ uploadManager.upload(new UploadFileObj(new File("/mnt/sdcard/Download/swift.jpg"
 ```
 
 
+###Download
+
+```java
+downloadManager.download(objectKey, "mnt/sdcard/oss_demo_dir/1.jpg");
+```
+
 
 Usage
 --------
