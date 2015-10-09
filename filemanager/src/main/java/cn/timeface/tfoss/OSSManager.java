@@ -6,12 +6,15 @@ import android.widget.Toast;
 
 import com.alibaba.sdk.android.oss.OSSService;
 import com.alibaba.sdk.android.oss.OSSServiceProvider;
+import com.alibaba.sdk.android.oss.callback.DeleteCallback;
 import com.alibaba.sdk.android.oss.model.AccessControlList;
 import com.alibaba.sdk.android.oss.model.AuthenticationType;
 import com.alibaba.sdk.android.oss.model.ClientConfiguration;
+import com.alibaba.sdk.android.oss.model.OSSException;
 import com.alibaba.sdk.android.oss.model.OSSFederationToken;
 import com.alibaba.sdk.android.oss.model.StsTokenGetter;
 import com.alibaba.sdk.android.oss.storage.OSSBucket;
+import com.alibaba.sdk.android.oss.storage.OSSFile;
 import com.alibaba.sdk.android.oss.util.OSSLog;
 
 import cn.timeface.tfoss.recorder.RecorderStrategy;
@@ -85,5 +88,24 @@ public class OSSManager {
         conf.setMaxConcurrentTaskNum(5); // 替换设置最大连接数接口，设置全局最大并发任务数，默认为6
         conf.setIsSecurityTunnelRequired(false); // 是否使用https，默认为false
         ossService.setClientConfiguration(conf);
+    }
+
+    public void delete(String key) {
+        OSSFile ossFile = ossService.getOssFile(bucket, key);
+        ossFile.deleteInBackground(new DeleteCallback() {
+            @Override
+            public void onSuccess(String s) {
+                Log.e(TAG, "[onSuccess] - delete " + s);
+
+                if (recorderStrategy != null) {
+                    recorderStrategy.deleteRecorder(s);
+                }
+            }
+
+            @Override
+            public void onFailure(String s, OSSException e) {
+                Log.e(TAG, "[onFailure] - delete " + s + " failed!\n" + e.toString());
+            }
+        });
     }
 }

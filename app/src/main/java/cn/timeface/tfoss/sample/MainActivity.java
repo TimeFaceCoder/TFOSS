@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import java.io.File;
 
+import cn.timeface.tfoss.download.DownloadManager;
 import cn.timeface.tfoss.upload.UploadFileObj;
 import cn.timeface.tfoss.upload.UploadManager;
 
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public String endPoint;
     public String bucketName;
     UploadManager uploadManager;
+    DownloadManager downloadManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         uploadManager = new UploadManager(getApplicationContext(), serverAddress, endPoint, bucketName);
         uploadManager.setRecorderStrategy(new SimpleRecorderStrategy());
+        downloadManager = new DownloadManager(getApplicationContext(), serverAddress, endPoint, bucketName);
     }
 
     @Override
@@ -58,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
             uploadManager.upload(new UploadFileObj(new File("/mnt/sdcard/Download/swift.jpg")));
             return true;
         }else if (id == R.id.action_delete) {
+        }else if (id == R.id.action_download) {
+            downloadManager.download(new UploadFileObj(new File("/mnt/sdcard/Download/swift.jpg")).getObjectKey(), "mnt/sdcard/oss_demo_dir/1.jpg");
         }
 
         return super.onOptionsItemSelected(item);

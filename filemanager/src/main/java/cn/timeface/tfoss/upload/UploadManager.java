@@ -80,24 +80,4 @@ public class UploadManager extends OSSManager {
             this.queue.remove(key).cancel();
         }
     }
-
-    public void delete(UploadFileObj file) {
-        String key = file.getObjectKey();
-        OSSFile ossFile = ossService.getOssFile(bucket, key);
-        ossFile.deleteInBackground(new DeleteCallback() {
-            @Override
-            public void onSuccess(String s) {
-                Log.e(TAG, "[onSuccess] - delete " + s);
-
-                if (recorderStrategy != null) {
-                    recorderStrategy.deleteRecorder(s);
-                }
-            }
-
-            @Override
-            public void onFailure(String s, OSSException e) {
-                Log.e(TAG, "[onFailure] - delete " + s + " failed!\n" + e.toString());
-            }
-        });
-    }
 }

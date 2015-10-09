@@ -5,4 +5,6 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_delete" android:title="删除"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_download" android:title="下载"
+        android:orderInCategory="100" app:showAsAction="never" />
 </menu>
