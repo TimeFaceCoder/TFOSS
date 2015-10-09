@@ -31,7 +31,7 @@ public class UploadManager extends OSSManager {
 
     public void checkFileExist(UploadFileObj file, Callback callback) {
         OkHttpClient httpClient = new OkHttpClient();
-        String url = String.format("http://%s.%s/%s", this.bucketName, this.endPoint, file.getObjectKey(this.folderName));
+        String url = String.format("http://%s.%s/%s", this.bucketName, this.endPoint, file.getObjectKey());
         Request request = new Request.Builder().head()
                 .url(url)
                 .build();
@@ -39,7 +39,7 @@ public class UploadManager extends OSSManager {
     }
 
     public void upload(UploadFileObj file) {
-        String key = file.getObjectKey(folderName);
+        String key = file.getObjectKey();
         OSSFile ossFile = ossService.getOssFile(bucket, key);
         try {
             ossFile.setUploadFilePath(file.getRealUploadFile().getAbsolutePath(), "application/octet-stream");
@@ -62,7 +62,6 @@ public class UploadManager extends OSSManager {
                 public void onFailure(String objectKey, OSSException ossException) {
                     Log.e(TAG, "[onFailure] - upload " + objectKey + " failed!\n" + ossException.toString());
                     ossException.printStackTrace();
-                    ossException.getException().printStackTrace();
                 }
             });
 
@@ -76,14 +75,14 @@ public class UploadManager extends OSSManager {
     }
 
     public void cancel(UploadFileObj file) {
-        String key = file.getObjectKey(folderName);
+        String key = file.getObjectKey();
         if (this.queue.get(key) != null) {
             this.queue.remove(key).cancel();
         }
     }
 
     public void delete(UploadFileObj file) {
-        String key = file.getObjectKey(folderName);
+        String key = file.getObjectKey();
         OSSFile ossFile = ossService.getOssFile(bucket, key);
         ossFile.deleteInBackground(new DeleteCallback() {
             @Override

@@ -23,7 +23,7 @@ public class FederationTokenGetter {
     }
 
     private static FederationToken getTokenFromServer(String serverAddress) {
-        String queryUrl = "http://" + serverAddress + "/auth/stsSign";
+        String queryUrl = serverAddress + "/auth/stsSign";
         String responseStr = null;
         try {
             OkHttpClient httpClient = new OkHttpClient();

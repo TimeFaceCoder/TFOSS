@@ -36,11 +36,11 @@ public class UploadFileObj {
         this.file = file;
     }
 
-    public String getObjectKey(String folderName) {
+    public String getObjectKey() {
         int index = file.getAbsolutePath().lastIndexOf(".");
         if (index < 0) {
             throw new IllegalArgumentException("没有查找到合法后缀.");
         }
-        return folderName + "/" + MD5.md5sum(file) + file.getAbsolutePath().substring(index - 1);
+        return "some_folder_name" + "/" + MD5.md5sum(file) + file.getAbsolutePath().substring(index - 1);
     }
 }

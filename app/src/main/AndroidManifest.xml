@@ -16,11 +16,11 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <!--10.1.29.208:8080-->
-        <meta-data android:name="ServerAddress" android:value="YourServerAddress"/>
-        <!--oss-cn-beijing.aliyuncs.com-->
-        <meta-data android:name="EndPoint" android:value="YourEndPoint"/>
+        <meta-data android:name="ServerAddress" android:value="http://tftest.timeface.cn/tfFire/"/>
+        <!--oss-cn-hangzhou.aliyuncs.com-->
+        <meta-data android:name="EndPoint" android:value="oss-cn-hangzhou.aliyuncs.com"/>
         <!--sts-android-demo-->
-        <meta-data android:name="BucketName" android:value="YourBucketName"/>
+        <meta-data android:name="BucketName" android:value="fire-audio"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >

@@ -30,14 +30,13 @@ public class MainActivity extends AppCompatActivity {
             ApplicationInfo appInfo = this.getPackageManager(). getApplicationInfo(this.getPackageName(), PackageManager.GET_META_DATA);
             this.serverAddress = appInfo.metaData.getString("ServerAddress");
             this.bucketName = appInfo.metaData.getString("BucketName");
-            this.endPoint = appInfo.metaData.getString("EndPoint");//sts-android-demo
+            this.endPoint = appInfo.metaData.getString("EndPoint");
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
 
         uploadManager = new UploadManager(getApplicationContext(), serverAddress, endPoint, bucketName);
         uploadManager.setRecorderStrategy(new SimpleRecorderStrategy());
-        uploadManager.setFolderName("test1");
     }
 
     @Override

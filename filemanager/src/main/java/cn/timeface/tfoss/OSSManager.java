@@ -30,7 +30,6 @@ public class OSSManager {
     protected String endPoint;
     protected String bucketName;
     protected OSSService ossService;
-    protected String folderName;
     protected OSSBucket bucket;
     protected RecorderStrategy recorderStrategy;
 
@@ -43,10 +42,6 @@ public class OSSManager {
 
         initOssService(context);
         bucket = ossService.getOssBucket(this.bucketName);
-    }
-
-    public void setFolderName(String folderName) {
-        this.folderName = folderName;
     }
 
     public void setRecorderStrategy(RecorderStrategy recorderStrategy) {
