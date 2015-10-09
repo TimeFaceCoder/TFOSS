@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             ApplicationInfo appInfo = this.getPackageManager(). getApplicationInfo(this.getPackageName(), PackageManager.GET_META_DATA);
             this.serverAddress = appInfo.metaData.getString("ServerAddress");
             this.bucketName = appInfo.metaData.getString("BucketName");
-            this.endPoint = appInfo.metaData.getString("EndPoint");
+            this.endPoint = appInfo.metaData.getString("EndPoint");//sts-android-demo
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

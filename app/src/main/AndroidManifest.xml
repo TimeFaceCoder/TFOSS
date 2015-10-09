@@ -15,8 +15,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <!--10.1.29.208:8080-->
         <meta-data android:name="ServerAddress" android:value="YourServerAddress"/>
+        <!--oss-cn-beijing.aliyuncs.com-->
         <meta-data android:name="EndPoint" android:value="YourEndPoint"/>
+        <!--sts-android-demo-->
         <meta-data android:name="BucketName" android:value="YourBucketName"/>
         <activity
             android:name=".MainActivity"
