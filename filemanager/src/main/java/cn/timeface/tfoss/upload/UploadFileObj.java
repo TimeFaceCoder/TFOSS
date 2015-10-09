@@ -20,7 +20,7 @@ public class UploadFileObj {
         this.file = new File(filePath);
     }
 
-    public File getRealUploadFile() {
+    public File getFinalUploadFile() {
         return this.file;
     }
 

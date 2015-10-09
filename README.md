@@ -89,7 +89,16 @@ public class SimpleRecorderStrategy extends RecorderStrategy {
 ```
 
 
-###Third 
+###Third
+Extend UploadFileObj and Override some method.
+
+`getFinalUploadFile`(default is the origin file)
+You could change the final upload file.
+`getObjectKey` The ObjectKey in aliyun oss.
+ 
+
+
+###Forth 
 Init your UploadManager or DownloadManager in `Application` or `Activity`.
 
 ```java

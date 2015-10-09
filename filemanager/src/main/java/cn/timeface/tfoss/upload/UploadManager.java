@@ -42,7 +42,7 @@ public class UploadManager extends OSSManager {
         String key = file.getObjectKey();
         OSSFile ossFile = ossService.getOssFile(bucket, key);
         try {
-            ossFile.setUploadFilePath(file.getRealUploadFile().getAbsolutePath(), "application/octet-stream");
+            ossFile.setUploadFilePath(file.getFinalUploadFile().getAbsolutePath(), "application/octet-stream");
             TaskHandler task = ossFile.ResumableUploadInBackground(new SaveCallback() {
                 @Override
                 public void onSuccess(String objectKey) {
