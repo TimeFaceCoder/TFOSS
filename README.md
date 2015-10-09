@@ -146,7 +146,7 @@ Usage
 Gradle:
 
     dependencies {
-        compile 'cn.timeface.tfoss:filemanager:1.1.1'
+        compile 'cn.timeface.tfoss:filemanager:1.1.2'
     }
 
 
