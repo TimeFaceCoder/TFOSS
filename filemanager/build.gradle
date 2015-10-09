@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/TimeFaceCoder/TFOSS'
     gitUrl = 'https://github.com/TimeFaceCoder/TFOSS.git'
 
-    libraryVersion = "1.1.1"
+    libraryVersion = "1.1.2"
 
     developerId = 'timeface'
     developerName = 'Ray'
@@ -29,10 +29,10 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 20151009
-        versionName "1.1.1"
+        versionName "1.1.2"
     }
     buildTypes {
         release {
