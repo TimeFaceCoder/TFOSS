@@ -96,10 +96,6 @@ public class OSSManager {
             @Override
             public void onSuccess(String s) {
                 Log.e(TAG, "[onSuccess] - delete " + s);
-
-                if (recorderStrategy != null) {
-                    recorderStrategy.deleteRecorder(s);
-                }
             }
 
             @Override
