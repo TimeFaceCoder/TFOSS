@@ -1,6 +1,7 @@
 package cn.timeface.tfoss;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.alibaba.sdk.android.oss.OSSService;
@@ -48,7 +49,7 @@ public class OSSManager {
         this.recorderStrategy = recorderStrategy;
     }
 
-    private void initOssService(final Context context) {
+    private void initOssService(Context context) {
         ossService = OSSServiceProvider.getService();
 
         ossService.setApplicationContext(context);
@@ -67,7 +68,8 @@ public class OSSManager {
                 // 为指定的用户拿取服务其授权需求的FederationToken
                 FederationToken token = FederationTokenGetter.getToken(serverAddress);
                 if (token == null) {
-                    Toast.makeText(context, "获取FederationToken失败!!!", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "获取FederationToken失败!!!");
+                    Toast.makeText(OSSManager.this.context, "获取FederationToken失败!!!", Toast.LENGTH_SHORT).show();
                     return null;
                 }
                 return new OSSFederationToken(token.getAk(), token.getSk(), token.getToken(), token.getExpiration());
